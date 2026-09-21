@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage x:Class="EventVsBindingMauiApp.MainPage"
              xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Name="thisPage">
 
     <StackLayout>
         <Slider x:Name="rotationSlider"
@@ -20,9 +21,23 @@
 
         <Label Margin="40"
                BackgroundColor="Bisque"
+               FontSize="{Binding Value, Source={x:Reference rotationSlider}}"
                HorizontalOptions="Center"
                Rotation="{Binding Source={x:Reference rotationSlider}, Path=Value}"
-               Text="{Binding Source={x:Reference rotationSlider}, Path=Value}" />
+               Text="{Binding Path=Value, Source={x:Reference rotationSlider}}" />
+
+        <Label Margin="40"
+               BackgroundColor="Bisque"
+               BindingContext="{x:Reference rotationSlider}"
+               FontSize="{Binding Value}"
+               HorizontalOptions="Center"
+               Rotation="{Binding Value}"
+               Text="{Binding Value, StringFormat='Wartość to {0:f}'}" />
+
+        <Label Text="Podaj komunikat:" />
+        <Entry Text="{Binding Source={x:Reference thisPage}, Path=Message}" />
+        <Button Clicked="Button_Clicked" Text="Wykonaj" />
+        <Label Text="{Binding Source={x:Reference thisPage}, Path=ReturnMessage}" />
 
     </StackLayout>
 
