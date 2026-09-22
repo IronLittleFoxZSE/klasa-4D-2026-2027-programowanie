@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="LayoutsMauiApp.MainPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <ScrollView>
+        <StackLayout>
+            <Label Background="Red" Text="Label w StackLayout" />
+            <Button HorizontalOptions="Start" Text="Przykładowy" />
+
+            <StackLayout BackgroundColor="Aqua"
+                         HorizontalOptions="Center"
+                         Orientation="Horizontal">
+                <Label Background="Brown"
+                       FontSize="50"
+                       Text="Inny label" />
+                <Button Text="Przycisk" />
+            </StackLayout>
+
+            <Label BackgroundColor="Beige"
+                   FontSize="30"
+                   Text="Kolejny label" />
+
+            <FlexLayout Direction="Row"
+                        FlowDirection="LeftToRight"
+                        Wrap="Wrap">
+                <Button Text="1" />
+                <Button Text="2" />
+                <Label Background="Beige" Text="Flex" />
+                <Button Text="3" />
+                <Button Text="3" />
+                <Button Text="3" />
+                <Button Text="3" />
+            </FlexLayout>
+
+            <Grid BackgroundColor="Chocolate"
+                  ColumnDefinitions="50,0.5*, 80 , 2*, auto"
+                  RowDefinitions="*,*">
+                <Button Text="0" />
+                <Button Grid.Column="1" Text="1" />
+                <Button Grid.Column="2" Text="2" />
+                <Button Grid.Column="3" Text="3" />
+                <Button Grid.Column="4" Text="44444" />
+                <Button Grid.Row="1"
+                        Grid.Column="2"
+                        Grid.ColumnSpan="2"
+                        Text="8" />
+
+                <StackLayout Grid.Row="1"
+                             Grid.Column="4"
+                             BackgroundColor="AliceBlue">
+                    <Label Text="1" />
+                    <Label Text="2" />
+                </StackLayout>
+            </Grid>
+
+        </StackLayout>
+    </ScrollView>
+
+</ContentPage>
