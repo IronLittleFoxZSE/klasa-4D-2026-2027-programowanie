@@ -1,0 +1,216 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="ControlsMauiApp.MainPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Name="thisPage"
+             BindingContext="{x:Reference thisPage}">
+
+    <ScrollView>
+        <StackLayout>
+            <Border Padding="16,8"
+                    Background="#2B0B98"
+                    HorizontalOptions="Center"
+                    Stroke="#C49B33"
+                    StrokeShape="RoundRectangle 40,0,0,40"
+                    StrokeThickness="4">
+                <Label FontAttributes="Bold"
+                       FontSize="18"
+                       Text=".NET MAUI"
+                       TextColor="White" />
+            </Border>
+
+            <Border Padding="16,8"
+                    Background="#2B0B98"
+                    HorizontalOptions="Center"
+                    StrokeShape="RoundRectangle 40,0,0,40"
+                    StrokeThickness="4">
+                <Border.Stroke>
+                    <LinearGradientBrush EndPoint="0,1">
+                        <GradientStop Offset="0.0" Color="Orange" />
+                        <GradientStop Offset="0.6" Color="Aquamarine" />
+                        <GradientStop Offset="1.0" Color="Brown" />
+                    </LinearGradientBrush>
+                </Border.Stroke>
+                <Label FontAttributes="Bold" TextColor="White">
+                    <Label.Text>.NET MAUI</Label.Text>
+                    <Label.FontSize>18</Label.FontSize>
+                </Label>
+            </Border>
+
+            <Label Text="Podaj komunikat:" />
+            <Entry Text="{Binding Message}" />
+            <Button Command="{Binding ChangeMessage}" Text="Wykonaj" />
+            <Entry IsReadOnly="True" Text="{Binding ReturnMessage}" />
+
+            <StackLayout Orientation="Horizontal" Spacing="10">
+                <Label Text="Wybierz datę:" />
+                <DatePicker Date="{Binding SelectDate}"
+                            MaximumDate="{Binding MaximumDate}"
+                            MinimumDate="{Binding MinimumDate}" />
+                <Label Text="{Binding SelectDate, StringFormat='Wybrana data {0}'}" />
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal" Spacing="10">
+                <Label Text="Wybierz godzine:" VerticalOptions="Center" />
+                <TimePicker Time="{Binding SelectTime}" />
+                <Label Text="{Binding SelectTime}" />
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Czy jesteś pełnoletni?" VerticalOptions="Center" />
+                <CheckBox IsChecked="{Binding IsLegalAge}" />
+            </StackLayout>
+            <Label Text="{Binding IsLegalAge, StringFormat='Wybrano: {0}'}" />
+
+            <Label Text="Komponent wielolinijkowy:" />
+            <Editor AutoSize="TextChanges"
+                    Background="AliceBlue"
+                    CharacterSpacing="1" />
+
+            <ImageButton HeightRequest="60"
+                         Source="dotnet_bot.png"
+                         WidthRequest="60" />
+
+            <Label Text="Podmień zdjęcia" />
+            <Image Aspect="AspectFit"
+                   HeightRequest="185"
+                   Source="{Binding SelectedImage}" />
+            <Button Command="{Binding ChangeImage}" Text="Zmień zdjęcie" />
+
+            <Label Text="Poziom załadowania danych:" />
+            <ProgressBar HeightRequest="10"
+                         Progress="{Binding ProgresDataLevel}"
+                         ProgressColor="Red" />
+            <Button Command="{Binding ChangeProgresDataLevel}" Text="Zwiększ poziom załadowania" />
+
+            <Label Text="Twoje ulubione zwierzę:" />
+            <StackLayout Orientation="Horizontal"
+                         RadioButtonGroup.GroupName="FavoriteAnimals"
+                         RadioButtonGroup.SelectedValue="{Binding FavoriteAnimal}"
+                         Spacing="10">
+                <RadioButton Content="Kot" Value="{Binding Content, Source={RelativeSource Self}}" />
+                <RadioButton Content="Pies" Value="{Binding Content, Source={RelativeSource Self}}" />
+                <RadioButton Content="Krowa" Value="{Binding Content, Source={RelativeSource Self}}" />
+            </StackLayout>
+            <Label Text="{Binding FavoriteAnimal, StringFormat='Ulubione zwierzę to: {0}'}" />
+
+            <Label Text="Wyszukaj:" />
+            <SearchBar SearchCommand="{Binding ChangeSearchData}"
+                       SearchCommandParameter="{Binding Text, Source={RelativeSource Self}}"
+                       Text="{Binding SearchData}" />
+            <Label Text="{Binding SearchData}" />
+
+            <StackLayout Orientation="Horizontal" Spacing="10">
+                <Label Text="Zwiększ lub zmniejsz:" VerticalOptions="Center" />
+                <Stepper Increment="2"
+                         Maximum="100"
+                         Minimum="0"
+                         Value="{Binding StepperValue}" />
+                <Label Text="{Binding StepperValue}" />
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal" Spacing="10">
+                <Label Text="Wybierz:" VerticalOptions="Center" />
+                <Switch IsToggled="{Binding IsOn}" />
+                <Label Text="{Binding IsOn}" />
+                <ActivityIndicator IsRunning="{Binding IsOn}" />
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal" Spacing="10">
+                <Label Text="Kolorowy prostokąt:" VerticalOptions="Center" />
+                <BoxView CornerRadius="10"
+                         HeightRequest="60"
+                         WidthRequest="50"
+                         Color="red" />
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal" Spacing="10">
+                <Label Text="Wybierz pozycję:" VerticalOptions="Center" />
+                <Picker ItemsSource="{Binding AnimalCollection}" SelectedItem="{Binding SelectedAnimal}" />
+                <Label Text="{Binding SelectedAnimal}" VerticalOptions="Center" />
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal" Spacing="10">
+                <Label Text="Wybierz pozycję:" VerticalOptions="Center" />
+                <Picker ItemDisplayBinding="{Binding Name}"
+                        ItemsSource="{Binding CarsCollection}"
+                        SelectedItem="{Binding SelectedCar}" />
+                <Label Text="{Binding SelectedCar.Name}" VerticalOptions="Center" />
+                <Label Text="{Binding SelectedCar.Description}" VerticalOptions="Center" />
+            </StackLayout>
+
+            <CollectionView Footer="2025"
+                            Header="Samochody"
+                            ItemsSource="{Binding CarsCollection}"
+                            SelectedItem="{Binding SelectedCar}"
+                            SelectionMode="Single">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout>
+                            <Label Text="{Binding Name}" />
+                            <Label FontAttributes="Italic" Text="{Binding Description}" />
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <CarouselView IndicatorView="indicatorView" ItemsSource="{Binding Monkeys}">
+                <CarouselView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout>
+                            <Border Margin="20"
+                                    Padding="20"
+                                    HeightRequest="360"
+                                    HorizontalOptions="Center"
+                                    Stroke="DarkGray"
+                                    StrokeShape="RoundRectangle 5"
+                                    VerticalOptions="Center">
+                                <StackLayout>
+                                    <Label FontAttributes="Bold"
+                                           FontSize="18"
+                                           HorizontalOptions="Center"
+                                           Text="{Binding Name}"
+                                           VerticalOptions="Center" />
+                                    <Image Aspect="AspectFill"
+                                           HeightRequest="150"
+                                           HorizontalOptions="Center"
+                                           Source="{Binding ImageUrl}"
+                                           WidthRequest="150" />
+                                    <Label HorizontalOptions="Center" Text="{Binding Location}" />
+                                    <Label FontAttributes="Italic"
+                                           HorizontalOptions="Center"
+                                           LineBreakMode="TailTruncation"
+                                           MaxLines="5"
+                                           Text="{Binding Details}" />
+                                </StackLayout>
+                            </Border>
+                        </StackLayout>
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
+            <IndicatorView x:Name="indicatorView"
+                           Margin="20"
+                           HorizontalOptions="Center"
+                           IndicatorColor="LightGray"
+                           SelectedIndicatorColor="DarkGray" />
+
+            <SwipeView>
+                <SwipeView.LeftItems>
+                    <SwipeItems>
+                        <SwipeItem BackgroundColor="LightGreen"
+                                   IconImageSource="favorite.png"
+                                   Text="Favorite" />
+                        <SwipeItem BackgroundColor="LightPink"
+                                   IconImageSource="delete.png"
+                                   Text="Delete" />
+                    </SwipeItems>
+                </SwipeView.LeftItems>
+                <!--  Content  -->
+                <Label Grid.Row="0"
+                       FontSize="18"
+                       Text="Przeciągnij mnie w bok" />
+            </SwipeView>
+        </StackLayout>
+    </ScrollView>
+
+</ContentPage>
